@@ -40,8 +40,8 @@ class HttpClient:
             self._headers.update(headers)
         self._session = ClientSession(base_url=self._base_url, headers=self._headers)
 
-    async def get(self, url: str) -> dict:
-        async with self._session.get(url=url) as response:
+    async def get(self, url: str, params: dict[str, str] | None = None) -> dict:
+        async with self._session.get(url=url, params=params) as response:
             response.raise_for_status()
             return await response.json()
 
