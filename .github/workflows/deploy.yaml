@@ -25,6 +25,7 @@ jobs:
           - name: bot
             context: .
             service: bot
+            dockerfile: ./bot/Dockerfile
             cache_scope: bot-cache
 
     steps:
