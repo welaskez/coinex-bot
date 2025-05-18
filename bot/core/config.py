@@ -1,10 +1,14 @@
 import logging
 from pathlib import Path
 
-from pydantic import BaseModel, PostgresDsn
+from pydantic import AmqpDsn, BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+class RabbitMQConfig(BaseModel):
+    url: AmqpDsn = "amqp://guest:guest@localhost:5672//"
 
 
 class RedisConfig(BaseModel):
@@ -46,6 +50,7 @@ class Settings(BaseSettings):
     bot_token: str
     redis: RedisConfig
     db: DatabaseConfig
+    rmq: RabbitMQConfig
     log: LoggingConfig = LoggingConfig()
 
 
