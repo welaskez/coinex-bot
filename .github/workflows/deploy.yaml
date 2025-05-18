@@ -54,8 +54,8 @@ jobs:
           load: true
           target: ${{ matrix.target }}
           tags: ${{ matrix.service }}:${{ github.sha }}
-          cache-from: type=registry,ref=ghcr.io/solid-technologies/${{ matrix.service }}:cache
-          cache-to: type=registry,ref=ghcr.io/solid-technologies/${{ matrix.service }}:cache,mode=max,compression=zstd
+          cache-from: type=registry,ref=ghcr.io/welaskez/${{ matrix.service }}:cache
+          cache-to: type=registry,ref=ghcr.io/welaskez/${{ matrix.service }}:cache,mode=max,compression=zstd
 
   deploy:
     runs-on: [ main ]
