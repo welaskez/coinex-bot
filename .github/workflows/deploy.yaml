@@ -24,7 +24,6 @@ jobs:
         include:
           - name: bot
             context: ./bot
-            target: .
             service: bot
             cache_scope: bot-cache
 
