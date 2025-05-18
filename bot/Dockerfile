@@ -15,4 +15,7 @@ RUN poetry install
 
 COPY bot .
 
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["python", "main.py"]
