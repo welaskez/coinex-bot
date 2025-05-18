@@ -36,7 +36,7 @@ async def main():
 
     dp.include_router(router)
     dp.startup.register(on_startup)
-    dp.startup.register(on_shutdown)
+    dp.shutdown.register(on_shutdown)
     dp.update.middleware(DatabaseMiddleware(session_pool=session_pool))
     dp.update.middleware(UserServiceMiddleware())
     dp.message.filter(ChatTypeFilter(chat_types=[ChatType.PRIVATE]))
