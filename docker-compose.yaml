@@ -75,6 +75,54 @@ services:
       RABBITMQ_DEFAULT_PASS: "guest"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      app:
+
+  taskiq-worker:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: taskiq-worker
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+      bot:
+        condition: service_started
+    command: >
+      taskiq worker core.taskiq.broker:broker --workers 1 -fsd --tasks-pattern "**/tasks"
+    networks:
+      app:
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  taskiq-scheduler:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: taskiq-scheduler
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+      bot:
+        condition: service_started
+    command: >
+      taskiq scheduler core.taskiq.broker:scheduler -fsd --tasks-pattern "**/tasks"
+    networks:
+      app:
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   postgres:
