@@ -13,7 +13,7 @@ class CoinexAPIConfig(BaseModel):
 
 
 class RabbitMQConfig(BaseModel):
-    url: AmqpDsn = "amqp://guest:guest@localhost:5672//"
+    url: AmqpDsn
 
 
 class RedisConfig(BaseModel):
