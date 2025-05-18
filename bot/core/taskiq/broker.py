@@ -2,8 +2,8 @@ import taskiq_aiogram
 from taskiq import TaskiqEvents, TaskiqScheduler, TaskiqState
 from taskiq.schedule_sources import LabelScheduleSource
 from taskiq_aio_pika import AioPikaBroker
-from utils import redis
 from utils.coinex_api import CoinexAPI
+from utils.redis import redis_client
 
 from core.config import settings
 
@@ -19,7 +19,7 @@ async def startup(state: TaskiqState) -> None:
         base_url=settings.coinex.base_url,
         headers={"X-Request-Id": settings.coinex.api_key},
     )
-    state.redis = redis
+    state.redis = redis_client
 
 
 @broker.on_event(TaskiqEvents.WORKER_SHUTDOWN)
