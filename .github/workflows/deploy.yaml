@@ -3,6 +3,10 @@ name: Deploy
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 env:
   POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
