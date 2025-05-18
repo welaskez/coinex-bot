@@ -13,7 +13,7 @@ from utils.coinex_api import CoinexAPI
 logger = logging.getLogger(name=__name__)
 
 
-@broker.task(schedule=[{"cron": "*/1 * * * *"}])
+@broker.task(schedule=[{"cron": "*/15 * * * *"}])
 async def publish_usdt_rub_price(
     context: Annotated[Context, TaskiqDepends()],
     bot: Bot = TaskiqDepends(),
