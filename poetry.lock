@@ -1626,6 +1626,21 @@ aio-pika = ">=9.0,<10.0"
 taskiq = ">=0.6.0,<1"
 
 [[package]]
+name = "taskiq-aiogram"
+version = "0.3.1"
+description = "Taskiq integration with Aiogram"
+optional = false
+python-versions = ">=3.8.1,<4.0.0"
+files = [
+    {file = "taskiq_aiogram-0.3.1-py3-none-any.whl", hash = "sha256:6332f5cd6db219c8f9e7cee8db5ba2dc96757e12aaddb443394128a9c3264ba6"},
+    {file = "taskiq_aiogram-0.3.1.tar.gz", hash = "sha256:0175ac768d7f315318b637eece2ddb24f35a1768990616021c344ca3383186dc"},
+]
+
+[package.dependencies]
+aiogram = ">=3,<4"
+taskiq = ">=0,<1"
+
+[[package]]
 name = "taskiq-dependencies"
 version = "1.5.7"
 description = "FastAPI like dependency injection implementation"
@@ -1821,4 +1836,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f98e5b2b59a9a9bb17a45306a47f1874046615885fcd30eda405eed3f1b6b8e0"
+content-hash = "233e1257ddc47d641e040fd2eb864d98fb3579bd20ad54230cc31239e9ca4992"
