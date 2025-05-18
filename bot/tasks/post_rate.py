@@ -21,7 +21,7 @@ async def publish_usdt_rub_price(
     coinex_api: CoinexAPI = context.state.coinex_api
     redis: Redis = context.state.redis
 
-    response = await coinex_api.get_usdt_rub_price()
+    response = await coinex_api.get_rate(symbol="usdtrub")
 
     message = await bot.send_message(
         chat_id=settings.channel_id,

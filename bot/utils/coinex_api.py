@@ -1,4 +1,4 @@
-from core.schemas.coinex import UsdtRubPriceResponse
+from core.schemas.coinex import GetRateResponse
 
 from utils.http_client import HttpClient, retry
 
@@ -8,6 +8,6 @@ class CoinexAPI(HttpClient):
         super().__init__(base_url=base_url, headers=headers)
 
     @retry()
-    async def get_usdt_rub_price(self) -> UsdtRubPriceResponse:
-        response = await self.get(url="/rate", params={"symbol": "usdtrub"})
-        return UsdtRubPriceResponse.model_validate(response)
+    async def get_rate(self, symbol: str) -> GetRateResponse:
+        response = await self.get(url="/rate", params={"symbol": symbol})
+        return GetRateResponse.model_validate(response)
