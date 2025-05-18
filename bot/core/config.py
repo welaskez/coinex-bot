@@ -7,6 +7,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+class CoinexAPIConfig(BaseModel):
+    base_url: str = "https://rates.coinex.kg"
+    api_key: str
+
+
 class RabbitMQConfig(BaseModel):
     url: AmqpDsn = "amqp://guest:guest@localhost:5672//"
 
@@ -51,6 +56,7 @@ class Settings(BaseSettings):
     redis: RedisConfig
     db: DatabaseConfig
     rmq: RabbitMQConfig
+    coinex: CoinexAPIConfig
     log: LoggingConfig = LoggingConfig()
 
 
