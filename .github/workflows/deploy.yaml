@@ -12,6 +12,9 @@ env:
   DB_URL: ${{ secrets.DB_URL }}
   REDIS_HOST: ${{ secrets.REDIS_HOST }}
   REDIS_PORT: ${{ secrets.REDIS_PORT }}
+  RMQ__URL: ${{ secrets.RMQ__URL }}
+  COINEX__API_KEY: ${{ secrets.COINEX__API_KEY }}
+  CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
 
 jobs:
   build:
@@ -65,12 +68,14 @@ jobs:
           touch .env
           echo POSTGRES_USER=${{ env.POSTGRES_USER }} >> .env
           echo POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} >> .env
-          echo POSTGRES_PORT=${{ env.POSTGRES_PORT }} >> .env
           echo POSTGRES_DB=${{ env.POSTGRES_DB }} >> .env
           echo BOT_CONFIG__BOT_TOKEN=${{ env.BOT_TOKEN }} >> .env
-          echo BOT_CONFIG__DB__URL=${{ env.DB_URL }}
-          echo BOT_CONFIG__REDIS__HOST=${{ env.REDIS_HOST }}
-          echo BOT_CONFIG__REDIS__PORT=${{ env.REDIS_PORT }}
+          echo BOT_CONFIG__DB__URL=${{ env.DB_URL }} >> .env 
+          echo BOT_CONFIG__REDIS__HOST=${{ env.REDIS_HOST }} >> .env 
+          echo BOT_CONFIG__REDIS__PORT=${{ env.REDIS_PORT }} >> .env 
+          echo BOT_CONFIG__RMQ__URL=${{ env.RMQ__URL }} >> .env 
+          echo BOT_CONFIG__COINEX__API_KEY=${{ env.COINEX__API_KEY }} >> .env 
+          echo BOT_CONFIG__CHANNEL_ID=${{ env.CHANNEL_ID }} >> .env 
 
       - name: deploy
         run: docker compose up --build -d
