@@ -1,7 +1,9 @@
 import asyncio
 from functools import wraps
+from ssl import create_default_context
 from typing import Any, Callable, Type
 
+import certifi
 from aiohttp import ClientError, ClientSession
 
 
@@ -39,14 +41,15 @@ class HttpClient:
         if headers:
             self._headers.update(headers)
         self._session = ClientSession(base_url=self._base_url, headers=self._headers)
+        self._ssl_context = create_default_context(cafile=certifi.where())
 
     async def get(self, url: str, params: dict[str, str] | None = None) -> dict:
-        async with self._session.get(url=url, params=params) as response:
+        async with self._session.get(url=url, params=params, ssl=self._ssl_context) as response:
             response.raise_for_status()
             return await response.json()
 
     async def post(self, url: str, body: dict[str, Any] | None = None) -> dict:
-        async with self._session.post(url=url, data=body) as response:
+        async with self._session.post(url=url, data=body, ssl=self._ssl_context) as response:
             response.raise_for_status()
             return await response.json()
 
