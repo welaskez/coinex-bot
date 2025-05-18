@@ -3,6 +3,7 @@ from typing import Annotated
 
 from aiogram import Bot
 from aiogram.exceptions import TelegramBadRequest
+from aiohttp import ConnectionTimeoutError
 from core import message_texts
 from core.config import settings
 from core.taskiq import broker
@@ -21,7 +22,11 @@ async def publish_usdt_rub_price(
     coinex_api: CoinexAPI = context.state.coinex_api
     redis: Redis = context.state.redis
 
-    response = await coinex_api.get_rate(symbol="usdtrub")
+    try:
+        response = await coinex_api.get_rate(symbol="usdtrub")
+    except ConnectionTimeoutError as ex:
+        logger.error(msg="Error while fetching price", exc_info=ex)
+        return
 
     message = await bot.send_message(
         chat_id=settings.channel_id,
