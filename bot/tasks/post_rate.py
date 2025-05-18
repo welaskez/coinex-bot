@@ -1,18 +1,24 @@
 import logging
+from typing import Annotated
 
 from aiogram import Bot
 from aiogram.exceptions import TelegramBadRequest
 from core import message_texts
 from core.config import settings
 from core.taskiq import broker
-from taskiq import TaskiqDepends
+from taskiq import Context, TaskiqDepends
 from utils.coinex_api import CoinexAPI
 
 logger = logging.getLogger(name=__name__)
 
 
-@broker.task(schedule=[{"cron": "*/15 * * * *"}])
-async def publish_usdt_rub_price(coinex_api: CoinexAPI, bot: Bot = TaskiqDepends()) -> None:
+@broker.task(schedule=[{"cron": "*/1 * * * *"}])
+async def publish_usdt_rub_price(
+    context: Annotated[Context, TaskiqDepends()],
+    bot: Bot = TaskiqDepends(),
+) -> None:
+    coinex_api: CoinexAPI = context.state.coinex_api
+
     response = await coinex_api.get_usdt_rub_price()
 
     message = await bot.send_message(
