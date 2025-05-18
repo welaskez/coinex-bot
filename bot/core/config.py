@@ -58,6 +58,7 @@ class Settings(BaseSettings):
     rmq: RabbitMQConfig
     coinex: CoinexAPIConfig
     log: LoggingConfig = LoggingConfig()
+    channel_id: str
 
 
 settings = Settings()
