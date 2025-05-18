@@ -3,3 +3,12 @@ START = """
 
 Ты можешь добавить этого бота в свой чат и запрашивать актуальный курс usdt/rub и других пар с Coinex.org
 """
+
+
+PRICE = """
+<b>USDT / RUB</b>
+
+<b>{price}</b>
+
+<i>@kursgarantex</i>
+"""
