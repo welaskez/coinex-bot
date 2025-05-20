@@ -84,6 +84,7 @@ services:
       - rabbitmq-data:/var/lib/rabbitmq
     networks:
       app:
+    restart: unless-stopped
     logging:
       driver: json-file
       options:
