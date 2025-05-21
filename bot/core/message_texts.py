@@ -10,5 +10,5 @@ PRICE = """
 
 <b>{price}</b>
 
-<i>@kursgarantex</i>
+<i>@coinex_kg</i>
 """
