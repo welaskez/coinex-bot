@@ -1,4 +1,4 @@
-from core.schemas.coinex import GetRateResponseIn, GetRateResponseOut
+from core.schemas.coinex import GetRateParams, GetRateResponse
 
 from utils.http_client import HttpClient, retry
 
@@ -8,7 +8,7 @@ class CoinexAPI(HttpClient):
         super().__init__(base_url=base_url, headers=headers)
 
     @retry()
-    async def get_rate(self, symbol: str) -> GetRateResponseOut:
-        params = GetRateResponseIn(symbol=symbol).model_dump()
+    async def get_rate(self, symbol: str) -> GetRateResponse:
+        params = GetRateParams(symbol=symbol).model_dump()
         response = await self.get(url="/rate", params=params)
-        return GetRateResponseOut.model_validate(response)
+        return GetRateResponse.model_validate(response)

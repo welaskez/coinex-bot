@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 
 
-class GetRateResponseIn(BaseModel):
+class GetRateParams(BaseModel):
     symbol: str
 
 
-class GetRateResponseOut(BaseModel):
+class GetRateResponse(BaseModel):
     ask_rate: float
     bid_rate: float
     symbol: str
