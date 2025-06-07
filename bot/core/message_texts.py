@@ -1,7 +1,7 @@
 START = """
 Привет.
 
-Этот бот постит актуальный курс USDT/RUB в @kursgarantex при поддержке Coinex.kg 
+Этот бот постит актуальный курс USDT/RUB в {channel} при поддержке Coinex.kg 
 """
 
 
